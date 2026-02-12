@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# AES Encryption Project - Frontend Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a Vite + React application built with TypeScript and Tailwind CSS v4. It provides a user interface for the AES Encryption API.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Authentication**: Login and Registration forms with validation (Zod + React Hook Form).
+- **Dashboard**: Secure file encryption (AES-GCM), decryption, and Google Drive integration.
+- **State Management**: Uses React Query (TanStack Query) for efficient data fetching and caching.
+- **Reactive Forms**: Form validation and submission handled by `react-hook-form`.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: [Vite](https://vitejs.dev/) + [React](https://react.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **State Management**: [@tanstack/react-query](https://tanstack.com/query/latest) + [React Context](https://react.dev/reference/react/useContext)
+- **HTTP Client**: [Axios](https://axios-http.com/)
+- **Routing**: [React Router v6](https://reactrouter.com/en/main)
+- **Validation**: [Zod](https://zod.dev/) + [React Hook Form](https://react-hook-form.com/)
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **src/api**: Axios client configuration and interceptors.
+- **src/components**: Reusable UI components.
+- **src/context**: React Context providers (AuthContext).
+- **src/pages**: Application pages (Login, Dashboard, Onboard).
+- **src/hooks**: Custom React hooks.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Environment Variables
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Create a `.env` file in the root of the project to configure API endpoints:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_API_BASE_URL=http://localhost:5000/api/v1
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Running the Application
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1.  **Install Dependencies**:
+    ```bash
+    npm install
+    ```
+2.  **Start Development Server**:
+    ```bash
+    npm run dev
+    ```
+    The application will run on `http://localhost:5173`.
+3.  **Build for Production**:
+    ```bash
+    npm run build
+    ```
+    This generates static files in the `dist/` directory.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Deployment
+
+To deploy the frontend, build the project and serve the `dist` folder using a static file server (e.g., Nginx, Apache) or integrate it with the ASP.NET Core backend using `UseStaticFiles`.
