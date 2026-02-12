@@ -28,6 +28,18 @@ builder.Services.AddSingleton<IGoogleDriveService, GoogleDriveService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IAesEncryptionService, AesEncryptionService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5173") // Vite default
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials()
+              .WithExposedHeaders("Content-Disposition"); // Important for filename extraction
+    });
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -42,6 +54,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
